@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     // 1. Conectar ao servidor Node
-    const socket = io('http://localhost:3001');
+    const socket = io('https://map-app-server-1avg.onrender.com');
 
     socket.on('connect', () => {
       setSocketId(socket.id);
