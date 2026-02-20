@@ -47,7 +47,7 @@ Abaixo estão os principais desafios técnicos encontrados durante o desenvolvim
 
 Utilizei ferramentas de Inteligência Artificial durante o desenvolvimento. Meu objetivo não foi apenas gerar código, mas utilizá-la como um **copiloto de aprendizagem acelerada** para:
 
-- **Transição de Stack:** Como minha experiência principal é em Python (Streamlit/Dash), usei a IA para mapear conceitos equivalentes no ecossistema JavaScript/React.
+- **Transição de Stack:** Como minha experiência principal é em Python (Streamlit/Dash/Flet), usei a IA para mapear conceitos equivalentes no ecossistema JavaScript/React.
 - **Explicação de Conceitos:** A ferramenta foi utilizada para aprofundar meu entendimento sobre o funcionamento de Hooks (`useEffect`, `useRef`) e a natureza assíncrona do Node.js.
 - **Debug e Deploy:** A IA auxiliou no diagnóstico de erros de ambiente e na configuração de variáveis de ambiente para o deploy no Render.
 
