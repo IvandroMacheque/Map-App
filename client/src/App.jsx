@@ -4,6 +4,8 @@ import { io } from 'socket.io-client';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+
+
 function App() {
 
   const hasCentered = useRef(false); // Ainda nao centralizou o mapa
@@ -18,6 +20,14 @@ function App() {
   const [socketId, setSocketId] = useState(null); // ID do socket
 
   useEffect(() => {
+    // Correção do ícone quebrado
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    });
+    
     // 1. Conectar ao servidor Node
     const socket = io('https://map-app-server-1avg.onrender.com');
 
@@ -60,14 +70,7 @@ function App() {
           markers.current[id].setLatLng([lat, lng]);
         } else {
           // Se é novo, cria o marcador
-          markers.current[id] = L.circleMarker([lat, lng], {
-            radius: 8,              // Tamanho da bolinha
-            fillColor: id === socketId ? "#007bff" : "#ff4d4d", // Azul para mim, Vermelho para outros
-            color: "#fff",          // Borda branca
-            weight: 2,              // Grossura da borda
-            opacity: 1,
-            fillOpacity: 0.9        // Opacidade
-          }).addTo(mapInstance.current)
+          markers.current[id] = L.marker([lat, lng]).addTo(mapInstance.current)
             .bindPopup(id === socketId ? "Você" : `Usuário: ${id.substring(0, 5)}`);
         }
       });
