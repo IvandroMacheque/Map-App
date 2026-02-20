@@ -71,7 +71,7 @@ function App() {
         } else {
           // Se é novo, cria o marcador
           markers.current[id] = L.marker([lat, lng]).addTo(mapInstance.current)
-            .bindPopup(id === socketId ? "Você" : `Usuário: ${id.substring(0, 5)}`);
+            .bindPopup(id === socket.id ? "Você" : `Usuário: ${id.substring(0, 5)}`);
         }
       });
 
