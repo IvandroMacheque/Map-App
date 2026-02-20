@@ -4,17 +4,6 @@ import { io } from 'socket.io-client';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Definição manual do ícone de marcacao
-const defaultIcon = new L.Icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
-
 function App() {
 
   const hasCentered = useRef(false); // Ainda nao centralizou o mapa
@@ -71,7 +60,14 @@ function App() {
           markers.current[id].setLatLng([lat, lng]);
         } else {
           // Se é novo, cria o marcador
-          markers.current[id] = L.marker([lat, lng]), { icon: defaultIcon }).addTo(mapInstance.current)
+          markers.current[id] = L.circleMarker([lat, lng], {
+            radius: 8,              // Tamanho da bolinha
+            fillColor: id === socketId ? "#007bff" : "#ff4d4d", // Azul para mim, Vermelho para outros
+            color: "#fff",          // Borda branca
+            weight: 2,              // Grossura da borda
+            opacity: 1,
+            fillOpacity: 0.9        // Opacidade
+          }).addTo(mapInstance.current)
             .bindPopup(id === socketId ? "Você" : `Usuário: ${id.substring(0, 5)}`);
         }
       });
