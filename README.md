@@ -3,8 +3,8 @@
 Este projeto foi desenvolvido como parte de um desafio técnico para criar uma aplicação web de mapas em tempo real. A aplicação permite que múltiplos usuários se conectem, visualizem sua própria posição e acompanhem a movimentação de outros usuários simultaneamente através de WebSockets.
 
 ## 🔗 Links do Projeto
-- **Live Demo:** [COLE_AQUI_O_LINK_DO_RENDER_CLIENT]
-- **Backend API:** [COLE_AQUI_O_LINK_DO_RENDER_SERVER]
+- **Live Demo:** https://map-app-server-1avg.onrender.com/
+- **Backend API:** https://map-app-client.onrender.com/
 
 ---
 
