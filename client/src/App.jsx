@@ -18,6 +18,14 @@ function App() {
   const [socketId, setSocketId] = useState(null); // ID do socket
 
   useEffect(() => {
+    // Correção do ícone quebrado
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    });
+    
     // 1. Conectar ao servidor Node
     const socket = io('https://map-app-server-1avg.onrender.com');
 
