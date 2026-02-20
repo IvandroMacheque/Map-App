@@ -32,6 +32,7 @@ const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
     console.log(`🚀 Servidor rodando na porta ${PORT}`);
+});
 
 // socket.emit -> envia para o cliente que enviou
 // io.emit -> envia para todos os clientes
