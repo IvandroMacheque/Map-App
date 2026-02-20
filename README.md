@@ -1,4 +1,4 @@
-# 🚀 Map App Challenge - Real-Time Geolocation
+# 🚀 Map App - Real-Time Geolocation
 
 Este projeto foi desenvolvido como parte de um desafio técnico para criar uma aplicação web de mapas em tempo real. A aplicação permite que múltiplos usuários se conectem, visualizem sua própria posição e acompanhem a movimentação de outros usuários simultaneamente através de WebSockets.
 
@@ -10,21 +10,10 @@ Este projeto foi desenvolvido como parte de um desafio técnico para criar uma a
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Frontend:** React.js (Hooks, Context, Refs)
-- **Backend:** Node.js & Express
-- **Comunicação:** Socket.io (WebSockets)
-- **Mapas:** Leaflet.js & OpenStreetMap
+- **Frontend:** React.js, Leaflet
+- **Backend:** Node.js, Express
+- **Comunicação:** Socket.io
 - **Deploy:** Render.com
-
----
-
-## 💡 Decisões Técnicas e Raciocínio
-
-Para atender aos requisitos de tempo real e performance, tomei as seguintes decisões arquiteturais:
-
-1.  **Comunicação Bidirecional com Socket.io:** Diferente de uma API REST tradicional (HTTP), utilizei WebSockets para permitir que o servidor envie atualizações para os clientes instantaneamente ("Server Push"), o que é essencial para o rastreamento de localização.
-2.  **Gerenciamento de Estado em Memória (RAM):** Como o desafio não exigia persistência histórica, as coordenadas são gerenciadas em um objeto JavaScript no servidor. Isso garante latência quase zero e alta performance.
-3.  **Híbrido React + Leaflet:** Optei por manipular o mapa através de `useRef` em vez de componentes React puros para o mapa. Isso permite que o Leaflet manipule o DOM de forma direta e performática, enquanto o React gerencia a interface de dados (Sidebar).
 
 ---
 
@@ -50,7 +39,6 @@ Abaixo estão os principais desafios técnicos encontrados durante o desenvolvim
 - [x] Visualização de mapa interativo.
 - [x] Captura automática de coordenadas via GPS do navegador.
 - [x] Lista lateral com Latitude/Longitude de todos os usuários online.
-- [x] Diferenciação visual entre o usuário local e terceiros.
 - [x] Sincronização instantânea ao conectar/desconectar.
 
 ---
