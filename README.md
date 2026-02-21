@@ -21,9 +21,9 @@ Este projeto foi desenvolvido como parte de um desafio técnico para criar uma a
 
 Abaixo estão os principais desafios técnicos encontrados durante o desenvolvimento e como foram resolvidos:
 
-### 1. Conexões Duplicadas no Ciclo de Vida do React
-**Desafio:** O comportamento do `StrictMode` do React causava a inicialização dupla do socket, gerando "usuários fantasmas" no servidor.
-**Solução:** Implementação de uma *cleanup function* no `useEffect` para desconectar o socket e limpar os observadores de GPS ao desmontar o componente, garantindo uma conexão única e estável.
+### 1. Sincronização de Conexões Persistentes e Ciclo de Vida
+**Desafio:** Inicialmente, a instância do Socket.io estava no escopo global, o que causava falhas na captura do `socket.id` e desconexões prematuras devido ao comportamento de montagem/desmontagem do React 18 (StrictMode).
+**Solução:** Movi a inicialização da conexão para dentro do hook `useEffect`. Isso garantiu que o "handshake" com o servidor ocorresse em sincronia com o ciclo de vida do componente. Além disso, utilizei o evento `socket.on('connect')` para atualizar o estado do React apenas quando a conexão estivesse confirmada, resolvendo problemas de referências nulas e garantindo que a identificação do usuário ("Você") fosse precisa.
 
 ### 2. Resolução de Assets em Ambiente de Produção
 **Desafio:** Durante o deploy no Render, os ícones padrão do Leaflet apresentaram erro de carregamento (404) devido à forma como o Vite processa arquivos estáticos.
