@@ -28,25 +28,25 @@ function App() {
       shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
     });
     
-    // 1. Conectar ao servidor Node
+    // Conectar ao servidor Node
     const socket = io('https://map-app-server-1avg.onrender.com');
 
     socket.on('connect', () => {
       setSocketId(socket.id);
     });
 
-    // 2. INICIALIZA O MAPA
+    // INICIALIZAR O MAPA
     if (!mapInstance.current) {
       mapInstance.current = L.map(mapRef.current).setView([0, 0], 2);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapInstance.current);
     }
 
-    // 3. ATIVA O GPS
+    // ATIVAR O GPS
     const watchId = navigator.geolocation.watchPosition((pos) => {
       const { latitude, longitude } = pos.coords;
       setStatus(`Minha posição: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
 
-      // SÓ CENTRALIZA SE FOR A PRIMEIRA VEZ
+      // SÓ CENTRALIZA O MAPA SE FOR A PRIMEIRA VEZ
       if (!hasCentered.current) {
         mapInstance.current.setView([latitude, longitude], 13);
         hasCentered.current = true; // Marca como "já centralizado"
@@ -56,7 +56,7 @@ function App() {
       socket.emit('update-location', { lat: latitude, lng: longitude });
     }, (err) => setStatus("Erro no GPS: " + err.message), { enableHighAccuracy: true });
 
-    // 4. Ouve o servidor quando alguém se mexer (ou você mesmo)
+    // Ouve o servidor quando alguém se mexer (ou você mesmo)
     socket.on('all-locations', (dataFromServer) => {
       // Atualiza o estado do React (Isso faz a lista lateral atualizar)
       setUsers(dataFromServer);
@@ -91,7 +91,7 @@ function App() {
     };
   }, []);
 
-  // 5. INTERFACE (JSX)
+  // INTERFACE
   return (
     <div style={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', fontFamily: 'Arial, sans-serif' }}>
 
