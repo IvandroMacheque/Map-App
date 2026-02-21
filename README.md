@@ -22,15 +22,15 @@ Este projeto foi desenvolvido como parte de um desafio técnico para criar uma a
 Abaixo estão os principais desafios técnicos encontrados durante o desenvolvimento e como foram resolvidos:
 
 ### 1. Sincronização de Conexões Persistentes e Ciclo de Vida
-**Desafio:** Inicialmente, a instância do Socket.io estava no escopo global, o que causava falhas na captura do `socket.id` e desconexões prematuras devido ao comportamento de montagem/desmontagem do React 18 (StrictMode).
+**Desafio:** Inicialmente, a instância do Socket.io estava no escopo global, o que causava falhas na captura do `socket.id` e desconexões prematuras devido ao comportamento de montagem/desmontagem do React 18 (StrictMode).<br>
 **Solução:** Movi a inicialização da conexão para dentro do hook `useEffect`. Isso garantiu que o "handshake" com o servidor ocorresse em sincronia com o ciclo de vida do componente. Além disso, utilizei o evento `socket.on('connect')` para atualizar o estado do React apenas quando a conexão estivesse confirmada, resolvendo problemas de referências nulas e garantindo que a identificação do usuário ("Você") fosse precisa.
 
 ### 2. Resolução de Assets em Ambiente de Produção
-**Desafio:** Durante o deploy no Render, os ícones padrão do Leaflet apresentaram erro de carregamento (404) devido à forma como o Vite processa arquivos estáticos.
+**Desafio:** Durante o deploy no Render, os ícones padrão do Leaflet apresentaram erro de carregamento (404) devido à forma como o Vite processa arquivos estáticos.<br>
 **Solução:** Implementação de uma configuração manual de ícones via CDN oficial, garantindo que os marcadores sejam exibidos corretamente em qualquer dispositivo ou navegador sem dependência de caminhos locais.
 
 ### 3. Sincronização de Estado de Identidade (Socket ID)
-**Desafio:** Garantir que o componente de Mapa e a Sidebar reconhecessem corretamente qual era o usuário local para aplicar diferenciação visual ("Você").
+**Desafio:** Garantir que o componente de Mapa e a Sidebar reconhecessem corretamente qual era o usuário local para aplicar diferenciação visual ("Você").<br>
 **Solução:** Utilização de um estado dedicado (`socketId`) sincronizado com o evento `connect` do servidor, permitindo a comparação lógica em tempo real entre o ID local e a lista global de conexões.
 
 ---
